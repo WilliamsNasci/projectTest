@@ -37,5 +37,6 @@ public class UserController {
         return this.userRepository.findAll();
     }
 
-
+    @PostMapping("/delete")
+    public void deleteUser( @RequestBody User user ) { this.userRepository.delete(user);}
 }
