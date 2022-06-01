@@ -1,8 +1,10 @@
-package br.com.login.repository;
+package br.com.login.modules.user.repository;
 
-import br.com.login.model.User;
+import br.com.login.modules.user.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User, Long> {
+
+    User findByEmail(String email);
 
 }

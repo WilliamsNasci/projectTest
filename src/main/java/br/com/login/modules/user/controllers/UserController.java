@@ -1,7 +1,8 @@
-package br.com.login.controllers;
+package br.com.login.modules.user.controllers;
 
-import br.com.login.model.User;
-import br.com.login.repository.UserRepository;
+import br.com.login.modules.user.entities.User;
+import br.com.login.modules.user.repository.UserRepository;
+import br.com.login.modules.user.services.CreateUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +16,9 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    CreateUserService createUserService;
+
     @GetMapping("/{id}")
     public User user(@PathVariable("id") Long id) {
 
@@ -27,9 +31,9 @@ public class UserController {
         return null;
     }
 
-    @PostMapping("/")
-    public void createUser( @RequestBody User user) {
-        this.userRepository.save(user);
+    @PostMapping("/create")
+    public User createUser( @RequestBody User user) {
+        return createUserService.execute(user);
     }
 
     @GetMapping("/list")
